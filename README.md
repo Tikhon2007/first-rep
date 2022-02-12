@@ -1,2 +1,2 @@
 # first-rep
-охоё
+lol
