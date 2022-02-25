@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class opasnost : MonoBehaviour
 {
-    public Transform opasnost1;
-    public Transform opasnost2;
+
+    public GameObject Object;
     public Transform player;
-    public Vector3 offset;
+    public Vector3 spavn;
 
-
-
+    void Start()
+    {
+        Vector3 spawnPosition = new Vector3(0, 1, player.position.z + 10);
+        Instantiate(Object, spawnPosition, Quaternion.identity);
+    }
     void FixedUpdate()
     {
-        //Random rand = new Random();
-        transform.position = player.position + offset;
-        
-
+        if (player.position.z < gameObject.transform.position.z)
+        {
+            Debug.Log("10000");
+        }
     }
+
 }
