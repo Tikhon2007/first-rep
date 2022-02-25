@@ -6,7 +6,7 @@ public class kameraplayer : MonoBehaviour
     public Vector3 offset;
 
     
-    void Update()
+    void FixedUpdate()
     {
         transform.position = player.position + offset;
 
