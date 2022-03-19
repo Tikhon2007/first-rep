@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class opasnost : MonoBehaviour
 {
-
-    public GameObject Object;
-    public Transform player;
-    public Vector3 spavn;
-
-    void Start()
+public Transform player;
+public Transform chank;
+    void Update()
     {
-        Vector3 spawnPosition = new Vector3(0, 1, player.position.z + 10);
-        Instantiate(Object, spawnPosition, Quaternion.identity);
-    }
-    void FixedUpdate()
-    {
-        if (player.position.z < gameObject.transform.position.z)
+        
+        if(player.position.z % 10f == 0f)
         {
-            Debug.Log("10000");
+            Vector3 spawnPosition = new Vector3(0, 1, player.position.z + 20);
+            Instantiate(chank, spawnPosition, Quaternion.identity);
         }
+
     }
 
 }
