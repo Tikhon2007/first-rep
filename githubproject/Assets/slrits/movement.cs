@@ -1,36 +1,73 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class movement : MonoBehaviour
 {
-    public Rigidbody rb;
-    public float speed = 2000f;
-    public float staticspeed = 2000f;
-    public float storoni = 200f;
+    
+    public float Speed = 5f;
+    public float StaticSpeed = 10f;
+
+    public float JumpForce = 300f;
+
+    //что бы эта переменная работала добавьте тэг "Ground" на вашу поверхность земли
+    private bool _isGrounded;
+    private Rigidbody _rb;
+
     void Start()
     {
-        Debug.Log("hello");
-        //rb.useGravity = false;
-        //rb.AddForce(0,0,100);
+        _rb = GetComponent<Rigidbody>();
     }
+
+    
     void FixedUpdate()
     {
+        StaticMovementLogic();
 
-        rb.AddForce(0, 0, staticspeed);
-        if (Input.GetKey("w"))
+        JumpLogic();
+
+        MovementLogic();
+    }
+    
+    private void MovementLogic()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        transform.Translate(movement * Speed * Time.fixedDeltaTime);
+    }
+    public void StaticMovementLogic()
+    {
+        
+        Vector3 movement = new Vector3(0.0f, 0.0f, 1.0f);
+        transform.Translate(movement * StaticSpeed * Time.fixedDeltaTime);
+    }
+
+    private void JumpLogic()
+    {
+        if (Input.GetAxis("Jump") > 0)
         {
-            rb.AddForce(0, 0, speed);
+            if (_isGrounded)
+            {
+                _rb.AddForce(Vector3.up * JumpForce);
+            }
         }
-        if (Input.GetKey("d"))
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        IsGroundedUpate(collision, true);
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        IsGroundedUpate(collision, false);
+    }
+
+    private void IsGroundedUpate(Collision collision, bool value)
+    {
+        if (collision.gameObject.tag == ("Ground"))
         {
-            rb.AddForce(storoni, 0, 0);
-        }
-        if (Input.GetKey("a"))
-        {
-            rb.AddForce(-storoni, 0, 0);
-        }
-        if (Input.GetKey("s"))
-        {
-            rb.AddForce(0, 0, -speed);
+            _isGrounded = value;
         }
     }
 }
