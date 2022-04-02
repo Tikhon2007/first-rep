@@ -13,20 +13,19 @@ public class chunksV3 : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(transform.position.z % 10 == 0){
-            int random = Random.Range(1,3);
-            if(random == 1){
-                Vector3 spawnPosition = new Vector3(0, 0, transform.position.z + aabb);
-                Instantiate(chunk1, spawnPosition, Quaternion.identity);
-            }
-            if(random == 2){
-                Vector3 spawnPosition = new Vector3(0, 0, transform.position.z + aabb);
-                Instantiate(chunk2, spawnPosition, Quaternion.identity);
-            }
-            if(random == 3){
-                Vector3 spawnPosition = new Vector3(0, 0, transform.position.z + aabb);
-                Instantiate(chunk3, spawnPosition, Quaternion.identity);
-            }
+       
+        if(transform.position.z -aabbccd > chunk1.position.z){
+            Vector3 spawnPosition = new Vector3(0, 1, transform.position.z + 120);
+            Instantiate(chunk1, spawnPosition, Quaternion.identity);
         }
+        if(transform.position.z -aabbccd > chunk2.position.z){
+            Vector3 spawnPosition = new Vector3(0, 1, transform.position.z + 120);
+            Instantiate(chunk2, spawnPosition, Quaternion.identity);
+        }
+        if(transform.position.z -aabbccd > chunk3.position.z){
+            Vector3 spawnPosition = new Vector3(0, 1, transform.position.z + 120);
+            Instantiate(chunk3, spawnPosition, Quaternion.identity);
+        }
+
     }
 }
