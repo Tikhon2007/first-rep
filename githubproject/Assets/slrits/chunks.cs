@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public class chanks : MonoBehaviour
+public class chunks : MonoBehaviour
 {
-    public Transform player;
-    public float aabbccd;
+    public float aabbcc = 40;
+    public float aabb = 120;
     public Vector3 vpered;
 
-    
     void FixedUpdate()
     {
-        if(player.position.z-aabbccd>transform.position.z){
-            transform.position = transform.position+vpered;
+        if (GameObject.FindWithTag("chunk"))
+        {
+            if (transform.position.z + aabbcc> GameObject.FindWithTag("chunk").transform.position.z)
+            {
+                Destroy(GameObject.FindWithTag("chunk"));
+            }
         }
+
+
     }
 }
